@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "05494f11-fe50-4ae7-bc84-59eaf6feab5c",
+		"name": "Intelligent Document Intelligence Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39625658"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"Abhijithnv\",\r\n\"password\":\"Abhijithnv\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_current_user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBYmhpaml0aG52Iiwicm9sZSI6IkFkbWluIiwidXNlcl9pZCI6MSwiZXhwIjoxNzYxODU5NzY0fQ.raOPXWJfK9M3Y2D2x86a9Mpq310l0t-Z2Hvk0iMZAE8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"Abhijithnv\",\r\n\"password\":\"Abhijithnv\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"me"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"abhi12\",\r\n  \"email\": \"abhi12@gmail.com\",\r\n  \"password\": \"abhi1\",\r\n  \"role\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhc3dhIiwicm9sZSI6InVzZXIiLCJ1c2VyX2lkIjoyLCJleHAiOjE3NjE5MzI4ODN9.RnxX_fY6J4LQEXPhkXEY5GygmMnVFc43jUXytQuS-qE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"username\":\"Abhijithnv\",\r\n\"password\":\"Abhijithnv\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/documents/search?query=travel story",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"documents",
+						"search"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "query",
+							"value": "travel story"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_summery_by_id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/documents/14\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"documents",
+						"14\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_summery",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmhpMSIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjQsImV4cCI6MTc2MTkzNDc5MH0.8uaZUvoirK7oVbP_P7xPipXfnnLtauVtE7T7BSZu6SI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/admin/summaries",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"admin",
+						"summaries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_summery",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmhpMSIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjQsImV4cCI6MTc2MTkzNTY2M30.jT9klD7Un5UoJ2SIUM5k1NoB26Gy9fPPXUPS9LqrHIM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/admin/summaries/3",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"admin",
+						"summaries",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

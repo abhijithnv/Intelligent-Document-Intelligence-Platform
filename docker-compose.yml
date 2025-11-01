@@ -1,0 +1,53 @@
+
+
+services:
+  db:
+    image: pgvector/pgvector:pg15
+    container_name: fastapi_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: yourdatabase
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    container_name: fastapi_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    restart: always
+
+  backend:
+    build: .
+    container_name: fastapi_backend
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:yourpassword@db:5432/yourdatabase
+      JWT_SECRET: your_super_secret_key
+      JWT_ALGORITHM: HS256
+      # HuggingFace model download settings
+      HF_HUB_DOWNLOAD_TIMEOUT: 300
+      TRANSFORMERS_OFFLINE: "0"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      # Cache HuggingFace models between container restarts
+      - huggingface_cache:/root/.cache/huggingface
+      # Cache NLTK data between container restarts
+      - nltk_data:/root/nltk_data
+    restart: always
+
+volumes:
+  postgres_data:
+  huggingface_cache:
+  nltk_data:
+  redis_data:

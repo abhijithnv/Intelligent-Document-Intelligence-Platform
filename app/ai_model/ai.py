@@ -116,17 +116,17 @@ def generate_summary(text: str, use_cache: bool = True) -> str:
             cache_key = generate_cache_key("summary", text_hash=text_hash)
             cached_summary = get_cache(cache_key)
             if cached_summary:
-                print("✅ Summary retrieved from cache")
+                print(" Summary retrieved from cache")
                 return cached_summary
         except Exception as e:
             # If cache fails, continue with normal generation
-            print(f"⚠️ Cache check failed, generating new summary: {e}")
+            print(f" Cache check failed, generating new summary: {e}")
 
     # Limit input size for faster processing
     words = text.split()
     if len(words) > MAX_INPUT_WORDS:
         text = " ".join(words[:MAX_INPUT_WORDS])
-        print(f"⚠️ Text truncated to {MAX_INPUT_WORDS} words for faster processing")
+        print(f" Text truncated to {MAX_INPUT_WORDS} words for faster processing")
 
     chunks = chunk_text(text, max_words=CHUNK_MAX_WORDS)
     
@@ -162,7 +162,7 @@ def generate_summary(text: str, use_cache: bool = True) -> str:
             )
             summaries.append(summary_result[0]["summary_text"])
         except Exception as e:
-            print(f"⚠️ Summarization failed for chunk {i+1}/{len(chunks)}: {e}")
+            print(f" Summarization failed for chunk {i+1}/{len(chunks)}: {e}")
             # Fallback: use first part of chunk
             summaries.append(chunk[:200])
 
@@ -182,7 +182,7 @@ def generate_summary(text: str, use_cache: bool = True) -> str:
                 truncation=True
             )[0]["summary_text"]
         except Exception as e:
-            print(f"⚠️ Final compression failed: {e}")
+            print(f" Final compression failed: {e}")
             # If compression fails, truncate to reasonable length
             final_summary = " ".join(final_summary.split()[:200])
 
@@ -195,7 +195,7 @@ def generate_summary(text: str, use_cache: bool = True) -> str:
             # Cache summaries for 24 hours (summaries don't change)
             set_cache(cache_key, final_summary, ttl=86400)
         except Exception as e:
-            print(f"⚠️ Failed to cache summary: {e}")
+            print(f" Failed to cache summary: {e}")
 
     return final_summary
 

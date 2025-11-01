@@ -25,12 +25,12 @@ def get_redis_client() -> redis.Redis:
             )
             # Test connection
             redis_client.ping()
-            print("✅ Redis connection established successfully")
+            print(" Redis connection established successfully")
         except redis.ConnectionError as e:
-            print(f"⚠️ Redis connection failed: {e}. Caching will be disabled.")
+            print(f" Redis connection failed: {e}. Caching will be disabled.")
             redis_client = None
         except Exception as e:
-            print(f"⚠️ Redis initialization error: {e}. Caching will be disabled.")
+            print(f" Redis initialization error: {e}. Caching will be disabled.")
             redis_client = None
     return redis_client
 
@@ -57,7 +57,7 @@ def get_cache(key: str) -> Optional[Any]:
         if cached_value:
             return json.loads(cached_value)
     except (redis.RedisError, json.JSONDecodeError) as e:
-        print(f"⚠️ Cache get error for key '{key}': {e}")
+        print(f" Cache get error for key '{key}': {e}")
     return None
 
 def set_cache(key: str, value: Any, ttl: Optional[int] = None) -> bool:
@@ -72,7 +72,7 @@ def set_cache(key: str, value: Any, ttl: Optional[int] = None) -> bool:
         client.setex(key, ttl, json_value)
         return True
     except (redis.RedisError, TypeError) as e:
-        print(f"⚠️ Cache set error for key '{key}': {e}")
+        print(f" Cache set error for key '{key}': {e}")
     return False
 
 def delete_cache(key: str) -> bool:
@@ -85,7 +85,7 @@ def delete_cache(key: str) -> bool:
         client.delete(key)
         return True
     except redis.RedisError as e:
-        print(f"⚠️ Cache delete error for key '{key}': {e}")
+        print(f" Cache delete error for key '{key}': {e}")
     return False
 
 def delete_cache_pattern(pattern: str) -> int:
@@ -100,7 +100,7 @@ def delete_cache_pattern(pattern: str) -> int:
             return client.delete(*keys)
         return 0
     except redis.RedisError as e:
-        print(f"⚠️ Cache delete pattern error for '{pattern}': {e}")
+        print(f" Cache delete pattern error for '{pattern}': {e}")
     return 0
 
 def cache_result(key_prefix: str, ttl: Optional[int] = None):

@@ -14,9 +14,9 @@ Base.metadata.create_all(bind=engine)
 # Initialize Redis connection
 get_redis_client()
 if is_redis_available():
-    print("✅ Redis caching is available and enabled")
+    print(" Redis caching is available and enabled")
 else:
-    print("⚠️ Redis caching is not available - running without cache")
+    print(" Redis caching is not available - running without cache")
 
 app = FastAPI(
     title="Intelligent Document Intelligence Platform",
